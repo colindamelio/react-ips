@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+const defaultState = {
+  partNumber: '',
+  partDesc: '',
+  partTotal: '',
+}
+
 class Field extends Component {
 
   state = {
@@ -16,12 +22,11 @@ class Field extends Component {
     })
   }
 
-  reset = () => {
-    this.myForm.reset();
+  reset = (event) => {
+    this.setState({...defaultState})
   }
 
   publish = () => {
-    console.log(this.state.partDesc, this.state.partNumber, this.state.partTotal);
     window.print();
   }
 
@@ -30,7 +35,7 @@ class Field extends Component {
     const enabled = partNumber.length && partTotal.length;
 
     return (
-      <form ref={el => this.myForm = el}>
+      <form>
         <Input
           name="partNumber"
           type="text"
